@@ -1,5 +1,6 @@
 #import "MessageModel.h"
-
+#import "NSString+Extension.h"
+#define textPadding 15
 @implementation MessageModel
 
 + (id)messageModelWithDict:(NSDictionary *)dict
@@ -16,25 +17,21 @@
     if(!_cellHeight){
         float offsetY=0;
         if(self.time)
-            offsetY+=10;
-        float labelHeight=[self getHeightByWidth:200 title:self.text font:[UIFont systemFontOfSize:15]];
+            offsetY+=15;
+            CGSize truesize = self.truesize;
+        float labelHeight=truesize.height;
         offsetY+=labelHeight;
-        offsetY+=30;
+        offsetY+=30+10;
         _cellHeight=offsetY;
     }
     return _cellHeight;
 }
 
-
-- (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font
-{
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 0)];
-    label.text = title;
-    label.font = font;
-    label.numberOfLines = 0;
-    [label sizeToFit];
-    CGFloat height = label.frame.size.height;
-    return height;
+-(CGSize)truesize{
+    if(CGSizeEqualToSize(_truesize, CGSizeZero)){
+        _truesize=[self.text sizeWithFont:[UIFont systemFontOfSize:15] maxSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width-2*textPadding-30-50, MAXFLOAT)];
+        
+    }
+    return _truesize;
 }
 @end

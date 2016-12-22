@@ -72,23 +72,19 @@
 		657DE65D1E0ABD7E008ED854 /* ChatDemo */ = {
 			isa = PBXGroup;
 			children = (
-				657DE6801E0AD3C7008ED854 /* NSString+Extension.h */,
-				657DE6811E0AD3C7008ED854 /* NSString+Extension.m */,
-				657DE67D1E0ACDAF008ED854 /* UIImage+ResizeImage.h */,
-				657DE67E1E0ACDAF008ED854 /* UIImage+ResizeImage.m */,
-				657DE67A1E0AC327008ED854 /* MessageModel.h */,
-				657DE67B1E0AC327008ED854 /* MessageModel.m */,
+				E38BADDC1E0B6F1D0075AA99 /* model */,
+				E38BADDB1E0B6F100075AA99 /* Tool */,
 				657DE6611E0ABD7E008ED854 /* AppDelegate.h */,
 				657DE6621E0ABD7E008ED854 /* AppDelegate.m */,
 				657DE6641E0ABD7E008ED854 /* ViewController.h */,
 				657DE6651E0ABD7E008ED854 /* ViewController.m */,
+				657DE6751E0ABE93008ED854 /* messageCell.h */,
+				657DE6761E0ABE93008ED854 /* messageCell.m */,
 				657DE6671E0ABD7E008ED854 /* Main.storyboard */,
 				657DE66A1E0ABD7E008ED854 /* Assets.xcassets */,
 				657DE66C1E0ABD7E008ED854 /* LaunchScreen.storyboard */,
 				657DE66F1E0ABD7E008ED854 /* Info.plist */,
 				657DE65E1E0ABD7E008ED854 /* Supporting Files */,
-				657DE6751E0ABE93008ED854 /* messageCell.h */,
-				657DE6761E0ABE93008ED854 /* messageCell.m */,
 			);
 			path = ChatDemo;
 			sourceTree = "<group>";
@@ -100,6 +96,26 @@
 				657DE65F1E0ABD7E008ED854 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E38BADDB1E0B6F100075AA99 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				657DE6801E0AD3C7008ED854 /* NSString+Extension.h */,
+				657DE6811E0AD3C7008ED854 /* NSString+Extension.m */,
+				657DE67D1E0ACDAF008ED854 /* UIImage+ResizeImage.h */,
+				657DE67E1E0ACDAF008ED854 /* UIImage+ResizeImage.m */,
+			);
+			name = Tool;
+			sourceTree = "<group>";
+		};
+		E38BADDC1E0B6F1D0075AA99 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				657DE67A1E0AC327008ED854 /* MessageModel.h */,
+				657DE67B1E0AC327008ED854 /* MessageModel.m */,
+			);
+			name = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

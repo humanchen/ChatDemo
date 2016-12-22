@@ -8,6 +8,7 @@
 
 #import "messageCell.h"
 #import "UIImage+ResizeImage.h"
+#import "NSString+Extension.h"
 #define textPadding 15
 @implementation messageCell
 @synthesize timeLabel,iconView,textView;
@@ -35,7 +36,7 @@
         textView = [UIButton buttonWithType:UIButtonTypeCustom];
         textView.titleLabel.numberOfLines = 0;
         textView.titleLabel.font = [UIFont systemFontOfSize:15];
-        [textView setBackgroundImage:[UIImage resizeImage:@"chat_recive_nor"]  forState:UIControlStateNormal];
+   
         [textView setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 
         textView.contentEdgeInsets = UIEdgeInsetsMake(textPadding, textPadding, textPadding, textPadding);
@@ -47,31 +48,27 @@
 -(void)setMessageModel:(MessageModel *)messageModel{
     CGFloat offsetY=0;
     if(messageModel.time){
-        timeLabel.frame=CGRectMake(0, 0, self.frame.size.width, 10);
-        offsetY+=10;
+        timeLabel.frame=CGRectMake(0, 0,[[UIScreen mainScreen] bounds].size.width, 10);
+        offsetY+=10+5;
+        timeLabel.text=messageModel.time;
     }
-    iconView.frame=CGRectMake(5, offsetY, 20, 20);
-
+    if(messageModel.type == kMessageModelTypeOther){
+        //接受者
+    iconView.frame=CGRectMake(5, offsetY+5, 30, 30);
     [textView setTitle:messageModel.text forState:UIControlStateNormal];
-    float labelHeight=[self getHeightByWidth:200 title:messageModel.text font:[UIFont systemFontOfSize:15]];
-    textView.frame=CGRectMake(25, offsetY, 200+2*textPadding, labelHeight+2*textPadding);
-    
-    
+    CGSize truesize = messageModel.truesize;
+    textView.frame=CGRectMake(35, offsetY, truesize.width+2*textPadding, truesize.height+2*textPadding);
+             [textView setBackgroundImage:[UIImage resizeImage:@"chat_recive_nor"]  forState:UIControlStateNormal];
+    }else{
+        //发送者
+        iconView.frame=CGRectMake([[UIScreen mainScreen] bounds].size.width-30-5, offsetY+5, 30, 30);
+        [textView setTitle:messageModel.text forState:UIControlStateNormal];
+        CGSize truesize = messageModel.truesize;
+        textView.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-35-(truesize.width+2*textPadding), offsetY, truesize.width+2*textPadding, truesize.height+2*textPadding);
+             [textView setBackgroundImage:[UIImage resizeImage:@"chat_send_nor"]  forState:UIControlStateNormal];
+    }
     
 }
-
-- (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font
-{
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 0)];
-    label.text = title;
-    label.font = font;
-    label.numberOfLines = 0;
-    [label sizeToFit];
-    CGFloat height = label.frame.size.height;
-    return height;
-}
-
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

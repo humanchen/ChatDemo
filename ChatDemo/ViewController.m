@@ -33,7 +33,10 @@
     NSArray *dataArray = [NSArray arrayWithContentsOfURL:dataUrl];
     for (NSDictionary *dict in dataArray) {
         MessageModel *message = [MessageModel messageModelWithDict:dict];
-        CGFloat he=message.cellHeight;
+        MessageModel *  messagelast=_dataArr.lastObject;
+        if([messagelast.time isEqualToString:message.time]){
+            message.time=nil;
+        }
         [_dataArr addObject:message];
 
     }
@@ -73,7 +76,7 @@
         cell = [[messageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     cell.messageModel=_dataArr[indexPath.row];
-//    cell.cellFrame = _cellFrameDatas[indexPath.row];
+
     
     return cell;
 }
