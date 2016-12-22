@@ -1,6 +1,6 @@
 #import "MessageModel.h"
 #import "NSString+Extension.h"
-#define textPadding 15
+
 @implementation MessageModel
 
 + (id)messageModelWithDict:(NSDictionary *)dict
@@ -17,7 +17,7 @@
     if(!_cellHeight){
         float offsetY=0;
         if(self.time)
-            offsetY+=15;
+            offsetY+=20+5;
             CGSize truesize = self.truesize;
         float labelHeight=truesize.height;
         offsetY+=labelHeight;

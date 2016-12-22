@@ -18,6 +18,7 @@
 		657DE67C1E0AC327008ED854 /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657DE67B1E0AC327008ED854 /* MessageModel.m */; };
 		657DE67F1E0ACDAF008ED854 /* UIImage+ResizeImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 657DE67E1E0ACDAF008ED854 /* UIImage+ResizeImage.m */; };
 		657DE6821E0AD3C7008ED854 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 657DE6811E0AD3C7008ED854 /* NSString+Extension.m */; };
+		E38BADE01E0BBC550075AA99 /* ToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E38BADDF1E0BBC550075AA99 /* ToolBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,9 @@
 		657DE67E1E0ACDAF008ED854 /* UIImage+ResizeImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResizeImage.m"; sourceTree = "<group>"; };
 		657DE6801E0AD3C7008ED854 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
 		657DE6811E0AD3C7008ED854 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		E38BADDE1E0BBC550075AA99 /* ToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolBar.h; sourceTree = "<group>"; };
+		E38BADDF1E0BBC550075AA99 /* ToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolBar.m; sourceTree = "<group>"; };
+		E38BADE41E0BBEBB0075AA99 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,7 @@
 		657DE65D1E0ABD7E008ED854 /* ChatDemo */ = {
 			isa = PBXGroup;
 			children = (
+				E38BADDD1E0BBBE20075AA99 /* ToolBar */,
 				E38BADDC1E0B6F1D0075AA99 /* model */,
 				E38BADDB1E0B6F100075AA99 /* Tool */,
 				657DE6611E0ABD7E008ED854 /* AppDelegate.h */,
@@ -94,6 +99,7 @@
 			children = (
 				657DE6781E0AC2DB008ED854 /* messages.plist */,
 				657DE65F1E0ABD7E008ED854 /* main.m */,
+				E38BADE41E0BBEBB0075AA99 /* PrefixHeader.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -118,6 +124,15 @@
 			name = model;
 			sourceTree = "<group>";
 		};
+		E38BADDD1E0BBBE20075AA99 /* ToolBar */ = {
+			isa = PBXGroup;
+			children = (
+				E38BADDE1E0BBC550075AA99 /* ToolBar.h */,
+				E38BADDF1E0BBC550075AA99 /* ToolBar.m */,
+			);
+			name = ToolBar;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,8 +141,8 @@
 			buildConfigurationList = 657DE6721E0ABD7E008ED854 /* Build configuration list for PBXNativeTarget "ChatDemo" */;
 			buildPhases = (
 				657DE6571E0ABD7E008ED854 /* Sources */,
-				657DE6581E0ABD7E008ED854 /* Frameworks */,
 				657DE6591E0ABD7E008ED854 /* Resources */,
+				657DE6581E0ABD7E008ED854 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -144,7 +159,7 @@
 		657DE6531E0ABD7E008ED854 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = human;
 				TargetAttributes = {
 					657DE65A1E0ABD7E008ED854 = {
@@ -198,6 +213,7 @@
 				657DE6601E0ABD7E008ED854 /* main.m in Sources */,
 				657DE67F1E0ACDAF008ED854 /* UIImage+ResizeImage.m in Sources */,
 				657DE6821E0AD3C7008ED854 /* NSString+Extension.m in Sources */,
+				E38BADE01E0BBC550075AA99 /* ToolBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +257,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -289,6 +306,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -318,6 +336,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8TS34KC67Y;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ChatDemo/PrefixHeader.pch;
 				INFOPLIST_FILE = ChatDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = human.ChatDemo;
@@ -330,6 +350,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8TS34KC67Y;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ChatDemo/PrefixHeader.pch;
 				INFOPLIST_FILE = ChatDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = human.ChatDemo;

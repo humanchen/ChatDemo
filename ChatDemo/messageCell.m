@@ -9,7 +9,7 @@
 #import "messageCell.h"
 #import "UIImage+ResizeImage.h"
 #import "NSString+Extension.h"
-#define textPadding 15
+
 @implementation messageCell
 @synthesize timeLabel,iconView,textView;
 - (void)awakeFromNib {
@@ -48,8 +48,8 @@
 -(void)setMessageModel:(MessageModel *)messageModel{
     CGFloat offsetY=0;
     if(messageModel.time){
-        timeLabel.frame=CGRectMake(0, 0,[[UIScreen mainScreen] bounds].size.width, 10);
-        offsetY+=10+5;
+        timeLabel.frame=CGRectMake(0, 0,[[UIScreen mainScreen] bounds].size.width, 20);
+        offsetY+=20+5;
         timeLabel.text=messageModel.time;
     }
     if(messageModel.type == kMessageModelTypeOther){
@@ -59,6 +59,7 @@
     CGSize truesize = messageModel.truesize;
     textView.frame=CGRectMake(35, offsetY, truesize.width+2*textPadding, truesize.height+2*textPadding);
              [textView setBackgroundImage:[UIImage resizeImage:@"chat_recive_nor"]  forState:UIControlStateNormal];
+        self.backgroundColor=[UIColor redColor];
     }else{
         //发送者
         iconView.frame=CGRectMake([[UIScreen mainScreen] bounds].size.width-30-5, offsetY+5, 30, 30);

@@ -9,11 +9,12 @@
 #import "ViewController.h"
 #import "MessageModel.h"
 #import "messageCell.h"
-#define kToolBarH 44
+#import "ToolBar.h"
 
 @interface ViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property(nonatomic,strong)UITableView *chatTable;
 @property(nonatomic,strong)NSMutableArray *dataArr;
+@property(nonatomic,strong)ToolBar *toolBar;
 @end
 
 @implementation ViewController
@@ -23,6 +24,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     [self loadData];
     [self addChatTable];
+    [self addToolBar];
 }
 
 
@@ -43,11 +45,11 @@
 }
 
 
--(void)addChatTable{
+- (void)addChatTable{
     
     self.view.backgroundColor = [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1.0];
     UITableView *chatView = [[UITableView alloc] init];
-    chatView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - kToolBarH);
+    chatView.frame = CGRectMake(0, 0, kScreenWidth,kScreenHeight - kToolBarH);
     chatView.backgroundColor = [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1.0];
     chatView.delegate = self;
     chatView.dataSource = self;
@@ -57,6 +59,12 @@
     _chatTable = chatView;
     
     [self.view addSubview:chatView];
+}
+
+- (void)addToolBar{
+    
+    _toolBar=[[ToolBar alloc]initWithFrame:CGRectMake(0, kScreenHeight-kToolBarH, kScreenWidth, kToolBarH)];
+    [self.view addSubview:_toolBar];
 }
 
 #pragma mark - tableView的数据源和代理方法
