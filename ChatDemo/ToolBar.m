@@ -34,18 +34,21 @@
     UIButton *sendSoundBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     sendSoundBtn.frame = CGRectMake(0, 0, kToolBarH, kToolBarH);
     [sendSoundBtn setImage:[UIImage imageNamed:@"chat_bottom_voice_nor"] forState:UIControlStateNormal];
+    [sendSoundBtn setImage:[UIImage imageNamed:@"chat_bottom_voice_press"] forState:UIControlStateHighlighted];
     _sendSoundBtn=sendSoundBtn;
     [bgView addSubview:sendSoundBtn];
     
     UIButton *addMoreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     addMoreBtn.frame = CGRectMake(kFrameWidth - kToolBarH, 0, kToolBarH, kToolBarH);
     [addMoreBtn setImage:[UIImage imageNamed:@"chat_bottom_up_nor"] forState:UIControlStateNormal];
+     [addMoreBtn setImage:[UIImage imageNamed:@"chat_bottom_up_press"] forState:UIControlStateHighlighted];
     _addMoreBtn=addMoreBtn;
     [bgView addSubview:addMoreBtn];
     
     UIButton *expressBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     expressBtn.frame = CGRectMake(kFrameWidth - kToolBarH * 2, 0, kToolBarH, kToolBarH);
     [expressBtn setImage:[UIImage imageNamed:@"chat_bottom_smile_nor"] forState:UIControlStateNormal];
+     [expressBtn setImage:[UIImage imageNamed:@"chat_bottom_smile_press"] forState:UIControlStateHighlighted];
     _expressBtn=expressBtn;
     [bgView addSubview:expressBtn];
     
@@ -57,7 +60,6 @@
     textField.frame = CGRectMake(kToolBarH, (kToolBarH - kTextFieldH) * 0.5, kFrameWidth - 3 * kToolBarH, kTextFieldH);
     textField.background = [UIImage imageNamed:@"chat_bottom_textfield"];
     _textField=textField;
-//    textField.delegate = self;
     [bgView addSubview:textField];
     
     

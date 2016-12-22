@@ -25,6 +25,35 @@
     [self loadData];
     [self addChatTable];
     [self addToolBar];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
+}
+
+- (void)keyboardWillChange:(NSNotification *)note
+{
+    NSLog(@"%@", note.userInfo);
+    NSDictionary *userInfo = note.userInfo;
+    CGFloat duration = [userInfo[@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
+    
+    CGRect keyFrame = [userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+    CGFloat moveY = keyFrame.origin.y - self.view.frame.size.height;
+ 
+    [UIView animateWithDuration:duration animations:^{
+        _toolBar.transform = CGAffineTransformMakeTranslation(0, moveY);
+    }];
+    
+    if(moveY<0){
+        _chatTable.frame=CGRectMake(0, 0, kScreenWidth, kScreenHeight-kToolBarH-keyFrame.size.height);
+        if (_dataArr.count>0)
+        {
+            NSIndexPath *index=[NSIndexPath indexPathForItem:_dataArr.count-1 inSection:0];
+            [_chatTable scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        }
+        
+    }else{
+        _chatTable.frame= CGRectMake(0, 0, kScreenWidth,kScreenHeight - kToolBarH);
+    }
 }
 
 
@@ -55,15 +84,20 @@
     chatView.dataSource = self;
     chatView.separatorStyle = UITableViewCellSeparatorStyleNone;
     chatView.allowsSelection = NO;
-//    [chatView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEdit)]];
+    [chatView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEdit)]];
     _chatTable = chatView;
     
     [self.view addSubview:chatView];
 }
 
+- (void)endEdit{
+    [self.view endEditing:YES];
+}
+
 - (void)addToolBar{
     
     _toolBar=[[ToolBar alloc]initWithFrame:CGRectMake(0, kScreenHeight-kToolBarH, kScreenWidth, kToolBarH)];
+    _toolBar.textField.delegate=self;
     [self.view addSubview:_toolBar];
 }
 
@@ -100,6 +134,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
