@@ -9,19 +9,19 @@
     message.text = dict[@"text"];
     message.time = dict[@"time"];
     message.type = [dict[@"type"] intValue];
-   
+    message.showTime=YES;
     return message;
 }
 
 -(CGFloat)cellHeight{
     if(!_cellHeight){
         float offsetY=0;
-        if(self.time)
+        if(self.showTime!=NO)
             offsetY+=20+5;
             CGSize truesize = self.truesize;
         float labelHeight=truesize.height;
         offsetY+=labelHeight;
-        offsetY+=30+10;
+        offsetY+=30;
         _cellHeight=offsetY;
     }
     return _cellHeight;

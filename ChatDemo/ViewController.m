@@ -37,7 +37,7 @@
     CGFloat duration = [userInfo[@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
     
     CGRect keyFrame = [userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-    CGFloat moveY = keyFrame.origin.y - self.view.frame.size.height;
+    CGFloat moveY = keyFrame.origin.y - kScreenHeight;
  
     [UIView animateWithDuration:duration animations:^{
         _toolBar.transform = CGAffineTransformMakeTranslation(0, moveY);
@@ -66,7 +66,9 @@
         MessageModel *message = [MessageModel messageModelWithDict:dict];
         MessageModel *  messagelast=_dataArr.lastObject;
         if([messagelast.time isEqualToString:message.time]){
-            message.time=nil;
+            message.showTime=NO;
+        }else{
+            message.showTime=YES;
         }
         [_dataArr addObject:message];
 
@@ -128,6 +130,43 @@
     MessageModel *cellModel = _dataArr[indexPath.row];
     return cellModel.cellHeight;
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    //1.获得时间
+    NSDate *senddate=[NSDate date];
+    NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"HH:mm"];
+    NSString *locationString=[dateformatter stringFromDate:senddate];
+    
+    //2.创建一个MessageModel类
+    MessageModel *message = [[MessageModel alloc] init];
+    message.text = textField.text;
+    message.time = locationString;
+    message.type = kMessageModelTypeMe;
+    
+    //3.创建一个CellFrameModel类
+    MessageModel *  messagelast=_dataArr.lastObject;
+    if([messagelast.time isEqualToString:message.time]){
+        message.showTime=NO;
+    }else{
+        message.showTime=YES;
+    }
+  
+    
+    //4.添加进去，并且刷新数据
+    [_dataArr addObject:message];
+    [_chatTable reloadData];
+    
+    //5.自动滚到最后一行
+    NSIndexPath *lastPath = [NSIndexPath indexPathForRow:_dataArr.count - 1 inSection:0];
+    [_chatTable scrollToRowAtIndexPath:lastPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    
+    textField.text = @"";
+    
+    return YES;
+}
+
 
 
 
