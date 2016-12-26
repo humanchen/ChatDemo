@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef void(^moreBlock)(void);
 @interface ToolBar : UIView
 @property(nonatomic,strong)UIImageView *bgView;
 @property(nonatomic,strong)UIButton *sendSoundBtn;
 @property(nonatomic,strong)UIButton *addMoreBtn;
 @property(nonatomic,strong)UIButton *expressBtn;
 @property(nonatomic,strong)UITextField *textField;
+
+@property(nonatomic,copy)moreBlock block1;
 @end

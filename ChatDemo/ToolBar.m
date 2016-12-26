@@ -43,6 +43,7 @@
     [addMoreBtn setImage:[UIImage imageNamed:@"chat_bottom_up_nor"] forState:UIControlStateNormal];
      [addMoreBtn setImage:[UIImage imageNamed:@"chat_bottom_up_press"] forState:UIControlStateHighlighted];
     _addMoreBtn=addMoreBtn;
+    [addMoreBtn addTarget:self action:@selector(more) forControlEvents:UIControlEventTouchUpInside];
     [bgView addSubview:addMoreBtn];
     
     UIButton *expressBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -62,6 +63,13 @@
     _textField=textField;
     [bgView addSubview:textField];
     
+    
+}
+
+- (void)more{
+    if(self.block1){
+        self.block1();
+    }
     
 }
 

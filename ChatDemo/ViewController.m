@@ -15,6 +15,7 @@
 @property(nonatomic,strong)UITableView *chatTable;
 @property(nonatomic,strong)NSMutableArray *dataArr;
 @property(nonatomic,strong)ToolBar *toolBar;
+@property(nonatomic,strong)UIView *toolView;
 @end
 
 @implementation ViewController
@@ -38,7 +39,9 @@
     
     CGRect keyFrame = [userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
     CGFloat moveY = keyFrame.origin.y - kScreenHeight;
- 
+    if(_toolView){
+        moveY=moveY-1000;
+    }
     [UIView animateWithDuration:duration animations:^{
         _toolBar.transform = CGAffineTransformMakeTranslation(0, moveY);
     }];
@@ -100,7 +103,31 @@
     
     _toolBar=[[ToolBar alloc]initWithFrame:CGRectMake(0, kScreenHeight-kToolBarH, kScreenWidth, kToolBarH)];
     _toolBar.textField.delegate=self;
+     WS(weakSelf);
+    [_toolBar setBlock1:^{
+        [weakSelf more];
+    }];
     [self.view addSubview:_toolBar];
+}
+
+- (void)more{
+    _toolView=[[UIView alloc]initWithFrame:CGRectMake(0, kScreenHeight-100, kScreenWidth, 100)];
+    _toolView.backgroundColor=[UIColor redColor];
+    
+    _toolView.frame=CGRectMake(0, kScreenHeight, kScreenWidth, 100);
+    [self.view addSubview:_toolView];
+    [UIView animateWithDuration:0.3 animations:^{
+        [_toolBar.textField resignFirstResponder];
+        _toolBar.frame=CGRectMake(0, kScreenHeight-100-kToolBarH, kScreenWidth, kToolBarH);
+        _toolView.frame=CGRectMake(0, kScreenHeight-100, kScreenWidth, 100);
+
+    }];
+//    [_toolBar.textField resignFirstResponder];
+//    _toolBar.textField.inputView =view;
+//    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [_toolBar.textField becomeFirstResponder];
+//    });
 }
 
 #pragma mark - tableView的数据源和代理方法
