@@ -12,4 +12,21 @@
     return [image resizableImageWithCapInsets:UIEdgeInsetsMake(imageH, imageW, imageH, imageW) resizingMode:UIImageResizingModeTile];
 }
 
+- (CGSize )getWantSize{
+    CGSize retSize = self.size;
+    CGFloat scaleH = 0.22;
+    CGFloat scaleW = 0.38;
+    CGFloat height = 0;
+    CGFloat width = 0;
+    if (retSize.height / kScreenHeight + 0.16 > retSize.width / kScreenWidth) {
+        height = kScreenHeight * scaleH;
+        width = retSize.width / retSize.height * height;
+    } else {
+        width = kScreenWidth * scaleW;
+        height = retSize.height / retSize.width * width;
+    }
+    return CGSizeMake(width, height);
+}
+
+
 @end

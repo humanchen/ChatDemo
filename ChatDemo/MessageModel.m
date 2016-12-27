@@ -1,5 +1,6 @@
 #import "MessageModel.h"
 #import "NSString+Extension.h"
+#import "UIImage+ResizeImage.h"
 
 @implementation MessageModel
 
@@ -30,7 +31,6 @@
 -(CGSize)truesize{
     if(CGSizeEqualToSize(_truesize, CGSizeZero)){
         _truesize=[self.text sizeWithFont:[UIFont systemFontOfSize:15] maxSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width-2*textPadding-30-50, MAXFLOAT)];
-        
     }
     return _truesize;
 }

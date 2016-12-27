@@ -4,4 +4,5 @@
 
 + (UIImage *)resizeImage:(NSString *)imageName;
 
+- (CGSize )getWantSize;
 @end

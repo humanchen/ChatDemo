@@ -12,7 +12,7 @@ typedef enum {
 @property (nonatomic, assign) MessageModelType type;
 @property (nonatomic, assign) BOOL showTime;
 @property (nonatomic,assign) CGFloat cellHeight;
-@property (nonatomic,assign) CGSize truesize;
+@property (nonatomic,assign) CGSize truesize;//文字大小
 + (id)messageModelWithDict:(NSDictionary *)dict;
 
 @end
