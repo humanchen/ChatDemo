@@ -170,17 +170,22 @@
 
 - (messageCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"cell";
     
-    messageCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    MessageModel *model =  _dataArr[indexPath.row];
+    if (model.useType==kMessageText){
+    static NSString *cellIdentifier1 = @"textcell";
+    
+    messageCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier1];
     
     if (cell == nil) {
-        cell = [[messageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[messageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier1];
     }
     cell.messageModel=_dataArr[indexPath.row];
 
     
     return cell;
+    }
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -202,6 +207,7 @@
     message.text = textField.text;
     message.time = locationString;
     message.type = kMessageModelTypeMe;
+    message.useType = kMessageText;
     
     //3.创建一个CellFrameModel类
     MessageModel *  messagelast=_dataArr.lastObject;

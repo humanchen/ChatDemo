@@ -11,6 +11,7 @@
     message.time = dict[@"time"];
     message.type = [dict[@"type"] intValue];
     message.showTime=YES;
+    message.useType=kMessageText;
     return message;
 }
 
