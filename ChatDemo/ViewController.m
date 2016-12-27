@@ -39,9 +39,7 @@
     
     CGRect keyFrame = [userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
     CGFloat moveY = keyFrame.origin.y - kScreenHeight;
-    if(_toolView){
-        moveY=moveY-1000;
-    }
+
     [UIView animateWithDuration:duration animations:^{
         _toolBar.transform = CGAffineTransformMakeTranslation(0, moveY);
     }];
@@ -97,6 +95,19 @@
 
 - (void)endEdit{
     [self.view endEditing:YES];
+    
+    if(_toolView){
+     
+        CGFloat moveY = 0;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.toolView.frame=CGRectMake(0, kScreenHeight, kScreenWidth, 100);
+            _chatTable.frame= CGRectMake(0, 0, kScreenWidth,kScreenHeight - kToolBarH);
+            _toolBar.transform = CGAffineTransformMakeTranslation(0, moveY);
+        } completion:^(BOOL finished) {
+            [_toolView removeFromSuperview];
+            _toolView = nil;
+        }];
+    }
 }
 
 - (void)addToolBar{
@@ -110,24 +121,44 @@
     [self.view addSubview:_toolBar];
 }
 
-- (void)more{
-    _toolView=[[UIView alloc]initWithFrame:CGRectMake(0, kScreenHeight-100, kScreenWidth, 100)];
-    _toolView.backgroundColor=[UIColor redColor];
+
+- (UIView *)toolView{
+    if(!_toolView){
+        _toolView=[[UIView alloc]initWithFrame:CGRectMake(0, kScreenHeight-100, kScreenWidth, 100)];
+        _toolView.backgroundColor=[UIColor redColor];
+        
+        _toolView.frame=CGRectMake(0, kScreenHeight, kScreenWidth, 100);
+        [self.view addSubview:_toolView];
+        
+    }
+    return _toolView;
     
-    _toolView.frame=CGRectMake(0, kScreenHeight, kScreenWidth, 100);
-    [self.view addSubview:_toolView];
+}
+
+- (void)more{
+    if(!_toolView){
+    //没展开
+    CGFloat moveY = -100;
     [UIView animateWithDuration:0.3 animations:^{
         [_toolBar.textField resignFirstResponder];
-        _toolBar.frame=CGRectMake(0, kScreenHeight-100-kToolBarH, kScreenWidth, kToolBarH);
-        _toolView.frame=CGRectMake(0, kScreenHeight-100, kScreenWidth, 100);
+        _toolBar.transform = CGAffineTransformMakeTranslation(0, moveY);
+        self.toolView.frame=CGRectMake(0, kScreenHeight-100, kScreenWidth, 100);
 
     }];
-//    [_toolBar.textField resignFirstResponder];
-//    _toolBar.textField.inputView =view;
-//    
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [_toolBar.textField becomeFirstResponder];
-//    });
+
+    _chatTable.frame=CGRectMake(0, 0, kScreenWidth, kScreenHeight-kToolBarH-(-moveY));
+    if (_dataArr.count>0)
+    {
+        NSIndexPath *index=[NSIndexPath indexPathForItem:_dataArr.count-1 inSection:0];
+        [_chatTable scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    }
+    }else{
+        [_toolView removeFromSuperview];
+        _toolView=nil;
+        
+        [_toolBar.textField becomeFirstResponder];
+    }
+    
 }
 
 #pragma mark - tableView的数据源和代理方法
