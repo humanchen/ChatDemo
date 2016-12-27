@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "MessageModel.h"
 #import "messageCell.h"
+#import "MessagePicCell.h"
 #import "ToolBar.h"
 
 @interface ViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
@@ -29,6 +30,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self addPicTest];
+    });
 }
 
 - (void)keyboardWillChange:(NSNotification *)note
@@ -168,7 +172,7 @@
 }
 
 
-- (messageCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     MessageModel *model =  _dataArr[indexPath.row];
@@ -182,8 +186,21 @@
     }
     cell.messageModel=_dataArr[indexPath.row];
 
-    
     return cell;
+    }
+    if (model.useType == kMessagePic){
+        static NSString *cellIdentifier2 = @"piccell";
+        
+        MessagePicCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier2];
+        
+        if (cell == nil) {
+            cell = [[MessagePicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier2];
+        }
+        cell.messageModel=_dataArr[indexPath.row];
+        
+        
+        return cell;
+        
     }
     return nil;
 }
@@ -231,7 +248,44 @@
     return YES;
 }
 
+- (void)addPicTest{
+    //1.获得时间
+    NSDate *senddate=[NSDate date];
+    NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"HH:mm"];
+    NSString *locationString=[dateformatter stringFromDate:senddate];
+    
+    //2.创建一个MessageModel类
+    MessageModel *message = [[MessageModel alloc] init];
 
+    message.time = locationString;
+    message.type = kMessageModelTypeMe;
+    message.image= [UIImage imageNamed:@"WechatIMG18"];
+    message.useType = kMessagePic;
+    
+    //3.创建一个CellFrameModel类
+    MessageModel *  messagelast=_dataArr.lastObject;
+    if([messagelast.time isEqualToString:message.time]){
+        message.showTime=NO;
+    }else{
+        message.showTime=YES;
+    }
+    
+    
+    //4.添加进去，并且刷新数据
+    [_dataArr addObject:message];
+    [_chatTable reloadData];
+    
+    //5.自动滚到最后一行
+    NSIndexPath *lastPath = [NSIndexPath indexPathForRow:_dataArr.count - 1 inSection:0];
+    [_chatTable scrollToRowAtIndexPath:lastPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    
+
+    
+    return ;
+
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

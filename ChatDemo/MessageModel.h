@@ -19,6 +19,7 @@ typedef enum {
 @property (nonatomic, assign) BOOL showTime;
 @property (nonatomic,assign) CGFloat cellHeight;
 @property (nonatomic,assign) CGSize truesize;//文字大小
+@property (nonatomic,strong) UIImage *image;//图片
 + (id)messageModelWithDict:(NSDictionary *)dict;
 
 @end

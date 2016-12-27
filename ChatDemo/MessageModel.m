@@ -17,14 +17,26 @@
 
 -(CGFloat)cellHeight{
     if(!_cellHeight){
+        //文字信息
+        if(self.useType==kMessageText){
         float offsetY=0;
         if(self.showTime!=NO)
             offsetY+=20+5;
-            CGSize truesize = self.truesize;
+        CGSize truesize = self.truesize;
         float labelHeight=truesize.height;
         offsetY+=labelHeight;
         offsetY+=30;
         _cellHeight=offsetY;
+        }
+        //图片信息
+        if(self.useType==kMessagePic){
+            float offsetY=0;
+            if(self.showTime!=NO)
+                offsetY+=20+5;
+            CGSize picSize = [self.image getWantSize];
+            offsetY+=picSize.height;
+            _cellHeight=offsetY;
+        }
     }
     return _cellHeight;
 }

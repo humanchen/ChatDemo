@@ -18,6 +18,7 @@
 		657DE67C1E0AC327008ED854 /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657DE67B1E0AC327008ED854 /* MessageModel.m */; };
 		657DE67F1E0ACDAF008ED854 /* UIImage+ResizeImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 657DE67E1E0ACDAF008ED854 /* UIImage+ResizeImage.m */; };
 		657DE6821E0AD3C7008ED854 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 657DE6811E0AD3C7008ED854 /* NSString+Extension.m */; };
+		E34426F91E12540C006CA52D /* MessagePicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E34426F81E12540C006CA52D /* MessagePicCell.m */; };
 		E38BADE01E0BBC550075AA99 /* ToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E38BADDF1E0BBC550075AA99 /* ToolBar.m */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,8 @@
 		657DE67E1E0ACDAF008ED854 /* UIImage+ResizeImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResizeImage.m"; sourceTree = "<group>"; };
 		657DE6801E0AD3C7008ED854 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
 		657DE6811E0AD3C7008ED854 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		E34426F71E12540C006CA52D /* MessagePicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePicCell.h; sourceTree = "<group>"; };
+		E34426F81E12540C006CA52D /* MessagePicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePicCell.m; sourceTree = "<group>"; };
 		E38BADDE1E0BBC550075AA99 /* ToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolBar.h; sourceTree = "<group>"; };
 		E38BADDF1E0BBC550075AA99 /* ToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolBar.m; sourceTree = "<group>"; };
 		E38BADE41E0BBEBB0075AA99 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -76,6 +79,7 @@
 		657DE65D1E0ABD7E008ED854 /* ChatDemo */ = {
 			isa = PBXGroup;
 			children = (
+				E34426F61E1253BB006CA52D /* View */,
 				E38BADDD1E0BBBE20075AA99 /* ToolBar */,
 				E38BADDC1E0B6F1D0075AA99 /* model */,
 				E38BADDB1E0B6F100075AA99 /* Tool */,
@@ -83,8 +87,6 @@
 				657DE6621E0ABD7E008ED854 /* AppDelegate.m */,
 				657DE6641E0ABD7E008ED854 /* ViewController.h */,
 				657DE6651E0ABD7E008ED854 /* ViewController.m */,
-				657DE6751E0ABE93008ED854 /* messageCell.h */,
-				657DE6761E0ABE93008ED854 /* messageCell.m */,
 				657DE6671E0ABD7E008ED854 /* Main.storyboard */,
 				657DE66A1E0ABD7E008ED854 /* Assets.xcassets */,
 				657DE66C1E0ABD7E008ED854 /* LaunchScreen.storyboard */,
@@ -102,6 +104,17 @@
 				E38BADE41E0BBEBB0075AA99 /* PrefixHeader.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E34426F61E1253BB006CA52D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				657DE6751E0ABE93008ED854 /* messageCell.h */,
+				657DE6761E0ABE93008ED854 /* messageCell.m */,
+				E34426F71E12540C006CA52D /* MessagePicCell.h */,
+				E34426F81E12540C006CA52D /* MessagePicCell.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		E38BADDB1E0B6F100075AA99 /* Tool */ = {
@@ -214,6 +227,7 @@
 				657DE67F1E0ACDAF008ED854 /* UIImage+ResizeImage.m in Sources */,
 				657DE6821E0AD3C7008ED854 /* NSString+Extension.m in Sources */,
 				E38BADE01E0BBC550075AA99 /* ToolBar.m in Sources */,
+				E34426F91E12540C006CA52D /* MessagePicCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
